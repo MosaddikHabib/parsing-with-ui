@@ -44,9 +44,14 @@ class StartPage(tk.Frame):
         label = tk.Label(self, text="", font=("Helvetica", 16), bg='#222D20', fg='white')
         label.pack(side="top", fill="x", pady=65)
 
-        image_path = "res/l01.png"
+        # image_path = "res/l01.png"
+        # main_image = Image.open(image_path)
+        # resized_image = main_image.resize((300, 170))
+        # self.image = ImageTk.PhotoImage(resized_image)
+
+        image_path = "res/logo 1logo.png"
         main_image = Image.open(image_path)
-        resized_image = main_image.resize((300, 170))
+        resized_image = main_image.resize ((300, 100))
         self.image = ImageTk.PhotoImage(resized_image)
 
         label_logo_image = tk.Label(self, image=self.image, bg='#222D20')
@@ -69,8 +74,8 @@ class StartPage(tk.Frame):
         # button1 = tk.Button(self, text="Go to Page One", command=lambda: controller.show_frame("PageOne"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
         # button1.pack(pady=5)
         #
-        # button2 = tk.Button(self, text="Go to Page Two", command=lambda: controller.show_frame("PageTwo"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
-        # button2.pack(pady=5)
+        button2 = tk.Button(self, text="Go to Page Two", command=lambda: controller.show_frame("PageTwo"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
+        button2.pack(pady=5)
 
 class PageOne(tk.Frame):
     def __init__(self, parent, controller):
