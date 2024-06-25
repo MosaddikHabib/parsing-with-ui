@@ -91,17 +91,13 @@ class StartPage(tk.Frame):
             else:
                 label_error.config(text="Insert the Correct Constrain")
 
-        # image_path = "res/rajIT Solution Ltd EDITED.png"
-        # main_image = Image.open (image_path)
-        # resized_image = main_image.resize ((300, 75))
-        # self.image = ImageTk.PhotoImage (resized_image)
 
         login_image_path = "res/btnLogin.png"
         btn_image = Image.open(login_image_path)
         resized_image_btn = btn_image.resize((150,42))
         self.button_image = ImageTk.PhotoImage(resized_image_btn)
 
-        btn_login = tk.Button(self, image=self.button_image, command=login, borderwidth=0, bg='#222D20')
+        btn_login = tk.Button(self, image=self.button_image, command=login, borderwidth=0, bg='#222D20', activebackground='#222D20')
         btn_login.image = btn_image  # Keep a reference to avoid garbage collection
         btn_login.pack()
 
