@@ -46,12 +46,12 @@ class StartPage(tk.Frame):
         label_logo_image.pack(side="top", pady=30)
 
         input_text_username = tk.StringVar()
-        userName = tk.Entry(self, width=30, textvariable=input_text_username, font=("Inter", 12), justify=LEFT, bg="#D9D9D9", fg="black")
+        userName = tk.Entry(self, width=30, textvariable=input_text_username, font=("Inter", 12), justify=LEFT, bg="white", fg="black")
         userName.pack(side=TOP, pady=10, ipady=5)
         userName.insert(0, "User name")
 
         input_text_password = tk.StringVar()
-        userPass = tk.Entry(self, width=30, textvariable=input_text_password, show="*", font=("Inter", 12), justify=LEFT, bg="#D9D9D9", fg="black")
+        userPass = tk.Entry(self, width=30, textvariable=input_text_password, show="*", font=("Inter", 12), justify=LEFT, bg="#FFFFFF", fg="black")
         userPass.pack(side=TOP, pady=10, ipady=5)
         userPass.insert(0, "Password")
 
