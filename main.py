@@ -103,7 +103,7 @@ class StartPage(tk.Frame):
 
         btn_login = tk.Button(self, image=self.button_image, command=login, borderwidth=0, bg='#222D20')
         btn_login.image = btn_image  # Keep a reference to avoid garbage collection
-        btn_login.pack(pady=10)
+        btn_login.pack()
 
         label_error = tk.Label(self, text="", font=("Inter", 12), bg='#222D20', fg='white')
         label_error.pack(pady=10)
