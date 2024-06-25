@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk, CENTER, TOP, LEFT
-# import ttkbootstrap as ttk
 from tkinter.messagebox import askyesno
 from PIL import Image, ImageTk
 
@@ -35,59 +34,6 @@ class MainApp(tk.Tk):
         frame = self.frames[page_name]
         frame.tkraise()
 
-class RoundButton(tk.Canvas):
-    def __init__(self, parent, text, command, **kwargs):
-        super().__init__(parent, width=200, height=50, bg='#222D20', highlightthickness=0)
-        self.command = command
-        self.text = text
-        self.radius = 10  # Radius for rounded corners
-
-        # Draw rounded rectangle
-        self.create_oval(0, 0, 2*self.radius, 2*self.radius, outline='#AD9309', fill='#AD9309')
-        self.create_oval(200-2*self.radius, 0, 200, 2*self.radius, outline='#AD9309', fill='#AD9309')
-        self.create_oval(0, 50-2*self.radius, 2*self.radius, 50, outline='#AD9309', fill='#AD9309')
-        self.create_oval(200-2*self.radius, 50-2*self.radius, 200, 50, outline='#AD9309', fill='#AD9309')
-        self.create_rectangle(self.radius, 0, 200-self.radius, 50, outline='#AD9309', fill='#AD9309')
-        self.create_rectangle(0, self.radius, 200, 50-self.radius, outline='#AD9309', fill='#AD9309')
-
-        # Add text
-        self.create_text(100, 25, text=text, fill='white', font=("Inter", 12, "bold"))
-
-        self.bind("<Button-1>", lambda e: command())
-
-    def set_text(self, new_text):
-        self.text = new_text
-        self.create_text(100, 25, text=new_text, fill='white', font=("Inter", 12, "bold"))
-
-    def __init__(self, parent, text, command, **kwargs):
-        super().__init__(parent, width=200, height=50, bg='#222D20', highlightthickness=0)
-        self.command = command
-        self.text = text
-        self.radius = 25  # Radius for rounded corners
-
-        self.create_oval(0, 0, 50, 50, outline='#AD9309', fill='#AD9309')
-        self.create_oval(150, 0, 200, 50, outline='#AD9309', fill='#AD9309')
-        self.create_rectangle(25, 0, 175, 50, outline='#AD9309', fill='#AD9309')
-        self.create_text(100, 25, text=text, fill='white', font=("Inter", 12, "bold"))
-
-        self.bind("<Button-1>", lambda e: command())
-
-    def set_text(self, new_text):
-        self.text = new_text
-        self.create_text(100, 25, text=new_text, fill='white', font=("Inter", 12, "bold"))
-
-class RoundEntry(tk.Canvas):
-    def __init__(self, parent, textvariable, **kwargs):
-        super().__init__(parent, width=480, height=50, bg='#222D20', highlightthickness=0)
-        self.textvariable = textvariable
-
-        self.create_oval(0, 0, 50, 50, outline='#AD9309', fill='white')
-        self.create_oval(430, 0, 480, 50, outline='#AD9309', fill='white')
-        self.create_rectangle(25, 0, 455, 50, outline='#AD9309', fill='white')
-
-        self.entry = tk.Entry(self, textvariable=textvariable, bd=0, font=("Inter", 12), justify=LEFT, **kwargs)
-        self.create_window(240, 25, window=self.entry, width=440, height=40)
-
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
@@ -106,22 +52,21 @@ class StartPage(tk.Frame):
         label_logo_image.pack(side="top", pady=20)
 
         input_text_username = tk.StringVar()
-        userName = RoundEntry(self, textvariable=input_text_username)
-        userName.pack(side=TOP, pady=10)
+        userName = tk.Entry(self, textvariable=input_text_username, font=("Inter", 12), justify=LEFT)
+        userName.pack(side=TOP, pady=10, ipady=5)
 
         input_text_password = tk.StringVar()
-        userPass = RoundEntry(self, textvariable=input_text_password, show="*")
+        userPass = tk.Entry(self, textvariable=input_text_password, show="*", font=("Inter", 12), justify=LEFT)
         userPass.pack(side=TOP, pady=10)
 
-        btn_login = RoundButton(self, text="Log In", command=lambda: controller.show_frame("PageOne"))
+        btn_login = tk.Button(self, text="Log In", command=lambda: controller.show_frame("PageOne"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
         btn_login.pack(pady=10)
 
-        button1 = RoundButton(self, text="Go to Page One", command=lambda: controller.show_frame("PageOne"))
+        button1 = tk.Button(self, text="Go to Page One", command=lambda: controller.show_frame("PageOne"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
         button1.pack(pady=5)
 
-        button2 = RoundButton(self, text="Go to Page Two", command=lambda: controller.show_frame("PageTwo"))
+        button2 = tk.Button(self, text="Go to Page Two", command=lambda: controller.show_frame("PageTwo"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
         button2.pack(pady=5)
-
 
 class PageOne(tk.Frame):
     def __init__(self, parent, controller):
