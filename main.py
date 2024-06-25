@@ -10,7 +10,8 @@ class MainApp(tk.Tk):
         # Set the window size and title
         self.geometry("1920x1080")
         # self.geometry("600x450")
-        self.title("Multi-Page Tkinter App")
+
+        self.title("hostMate | RajIT | made for RMCH")
 
         # Create a container for all the pages
         container = tk.Frame(self)
@@ -94,10 +95,13 @@ class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
         self.controller = controller
-        self.configure(bg='#222D20')
+        self.configure(bg='#A22F20')
 
-        label = tk.Label(self, text="Page Two", font=("Helvetica", 16), bg='#222D20', fg='white')
-        label.pack(side="top", fill="x", pady=10)
+        # label = tk.Label(self, text="Page Two", font=("Helvetica", 16), bg='#222D20', fg='white')
+        label = tk.Label(self, text="Page Two", font=("Helvetica", 16))
+        label.pack()
+        # label.pack(side="top", fill="x", pady=10)
+
 
         button = ttk.Button(self, text="Go to the Start Page",
                             command=lambda: controller.show_frame("StartPage"))
