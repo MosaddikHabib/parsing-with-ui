@@ -49,14 +49,19 @@ class StartPage(tk.Frame):
         # main_image = Image.open(image_path)
         # resized_image = main_image.resize((300, 170))
         # self.image = ImageTk.PhotoImage(resized_image)
-
-        image_path = "res/logo 1logo.png"
+        #
+        image_path = "res/rajIT Solution Ltd EDITED.png"
         main_image = Image.open(image_path)
-        resized_image = main_image.resize ((300, 100))
+        resized_image = main_image.resize ((300, 75))
         self.image = ImageTk.PhotoImage(resized_image)
 
+        # image_path = "res/logo 1logo.png"
+        # main_image = Image.open(image_path)
+        # resized_image = main_image.resize ((300, 100))
+        # self.image = ImageTk.PhotoImage(resized_image)
+
         label_logo_image = tk.Label(self, image=self.image, bg='#222D20')
-        label_logo_image.pack(side="top", pady=20)
+        label_logo_image.pack(side="top", pady=30)
 
         input_text_username = tk.StringVar()
         userName = tk.Entry(self, width=30, textvariable=input_text_username, font=("Inter", 12), justify=LEFT, bg="#D9D9D9", fg="black")
