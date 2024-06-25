@@ -45,20 +45,10 @@ class StartPage(tk.Frame):
         label = tk.Label(self, text="", font=("Helvetica", 16), bg='#222D20', fg='white')
         label.pack(side="top", fill="x", pady=65)
 
-        # image_path = "res/l01.png"
-        # main_image = Image.open(image_path)
-        # resized_image = main_image.resize((300, 170))
-        # self.image = ImageTk.PhotoImage(resized_image)
-        #
         image_path = "res/rajIT Solution Ltd EDITED.png"
         main_image = Image.open(image_path)
-        resized_image = main_image.resize ((300, 75))
+        resized_image = main_image.resize((300, 75))
         self.image = ImageTk.PhotoImage(resized_image)
-
-        # image_path = "res/logo 1logo.png"
-        # main_image = Image.open(image_path)
-        # resized_image = main_image.resize ((300, 100))
-        # self.image = ImageTk.PhotoImage(resized_image)
 
         label_logo_image = tk.Label(self, image=self.image, bg='#222D20')
         label_logo_image.pack(side="top", pady=30)
@@ -71,17 +61,24 @@ class StartPage(tk.Frame):
         userPass = tk.Entry(self, width=30, textvariable=input_text_password, show="*", font=("Inter", 12), justify=LEFT, bg="#D9D9D9", fg="black")
         userPass.pack(side=TOP, pady=10, ipady=5)
 
-        btn_login = tk.Button(self, text="Log In", width=8, command=lambda: controller.show_frame("PageOne"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
+        def login():
+            username = input_text_username.get()
+            password = input_text_password.get()
+            if (username == "rmch" and password == "RMCH") or (username == "ITadmin" and password == "rajIT"):
+                controller.show_frame("PageOne")
+            else:
+                label_error.config(text="Insert the Correct Constrain")
+
+        btn_login = tk.Button(self, text="Log In", width=8, command=login, font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
         btn_login.pack(pady=10)
 
-        label = tk.Label (self, text="Insert the Correct Constrain", font=("Inter", 12), bg='#222D20', fg='white')
-        label.pack (pady=65)
+        label_error = tk.Label(self, text="", font=("Inter", 12), bg='#222D20', fg='white')
+        label_error.pack(pady=10)
 
-        # button1 = tk.Button(self, text="Go to Page One", command=lambda: controller.show_frame("PageOne"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
-        # button1.pack(pady=5)
-        #
+        # Temp button
         button2 = tk.Button(self, text="Go to Page Two", command=lambda: controller.show_frame("PageTwo"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
         button2.pack(pady=5)
+
 
 class PageOne(tk.Frame):
     def __init__(self, parent, controller):
