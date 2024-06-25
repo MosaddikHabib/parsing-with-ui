@@ -52,21 +52,21 @@ class StartPage(tk.Frame):
         label_logo_image.pack(side="top", pady=20)
 
         input_text_username = tk.StringVar()
-        userName = tk.Entry(self, textvariable=input_text_username, font=("Inter", 12), justify=LEFT)
+        userName = tk.Entry(self, width=30, textvariable=input_text_username, font=("Inter", 12), justify=LEFT, bg="#D9D9D9", fg="black")
         userName.pack(side=TOP, pady=10, ipady=5)
 
         input_text_password = tk.StringVar()
-        userPass = tk.Entry(self, textvariable=input_text_password, show="*", font=("Inter", 12), justify=LEFT)
-        userPass.pack(side=TOP, pady=10)
+        userPass = tk.Entry(self, width=30, textvariable=input_text_password, show="*", font=("Inter", 12), justify=LEFT, bg="#D9D9D9", fg="black")
+        userPass.pack(side=TOP, pady=10, ipady=5)
 
         btn_login = tk.Button(self, text="Log In", command=lambda: controller.show_frame("PageOne"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
         btn_login.pack(pady=10)
 
-        button1 = tk.Button(self, text="Go to Page One", command=lambda: controller.show_frame("PageOne"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
-        button1.pack(pady=5)
-
-        button2 = tk.Button(self, text="Go to Page Two", command=lambda: controller.show_frame("PageTwo"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
-        button2.pack(pady=5)
+        # button1 = tk.Button(self, text="Go to Page One", command=lambda: controller.show_frame("PageOne"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
+        # button1.pack(pady=5)
+        #
+        # button2 = tk.Button(self, text="Go to Page Two", command=lambda: controller.show_frame("PageTwo"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
+        # button2.pack(pady=5)
 
 class PageOne(tk.Frame):
     def __init__(self, parent, controller):
