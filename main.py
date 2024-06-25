@@ -9,6 +9,7 @@ class MainApp(tk.Tk):
 
         # Set the window size and title
         self.geometry("1920x1080")
+        # self.geometry("600x450")
         self.title("Multi-Page Tkinter App")
 
         # Create a container for all the pages
@@ -40,8 +41,8 @@ class StartPage(tk.Frame):
         self.controller = controller
         self.configure(bg='#222D20')
 
-        label = tk.Label(self, text="Start Page", font=("Helvetica", 16), bg='#222D20', fg='white')
-        label.pack(side="top", fill="x", pady=10)
+        label = tk.Label(self, text="", font=("Helvetica", 16), bg='#222D20', fg='white')
+        label.pack(side="top", fill="x", pady=65)
 
         image_path = "res/l01.png"
         main_image = Image.open(image_path)
@@ -59,8 +60,11 @@ class StartPage(tk.Frame):
         userPass = tk.Entry(self, width=30, textvariable=input_text_password, show="*", font=("Inter", 12), justify=LEFT, bg="#D9D9D9", fg="black")
         userPass.pack(side=TOP, pady=10, ipady=5)
 
-        btn_login = tk.Button(self, text="Log In", command=lambda: controller.show_frame("PageOne"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
+        btn_login = tk.Button(self, text="Log In", width=8, command=lambda: controller.show_frame("PageOne"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
         btn_login.pack(pady=10)
+
+        label = tk.Label (self, text="Insert the Correct Constrain", font=("Inter", 12), bg='#222D20', fg='white')
+        label.pack (pady=65)
 
         # button1 = tk.Button(self, text="Go to Page One", command=lambda: controller.show_frame("PageOne"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
         # button1.pack(pady=5)
