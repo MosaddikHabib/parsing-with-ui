@@ -2,49 +2,18 @@ import tkinter as tk
 from tkinter import ttk, CENTER, TOP, LEFT
 from PIL import Image, ImageTk
 
-class PageOne(tk.Frame):
-    def __init__(self, parent, controller):
-        super().__init__(parent)
-        self.controller = controller
-        self.configure(bg='#222D20')
-
-        label = tk.Label(self, text="Page One", font=("Helvetica", 16), bg='#222D20', fg='white')
-        label.pack(side="top", fill="x", pady=10)
-
-        button = ttk.Button(self, text="Go to the Start Page",
-                            command=lambda: controller.show_frame("StartPage"))
-        button.pack(pady=5)
-
-class PageTwo(tk.Frame):
-    def __init__(self, parent, controller):
-        super().__init__(parent)
-        self.controller = controller
-        self.configure(bg='#A22F20')
-
-        label = tk.Label(self, text="Page Two", font=("Helvetica", 16))
-        label.pack()
-
-        button = ttk.Button(self, text="Go to the Start Page",
-                            command=lambda: controller.show_frame("StartPage"))
-        button.pack(pady=5)
-
 class MainApp(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Set the window size and title
         self.geometry("1920x1080")
         self.title("hostMate | RajIT | made for RMCH")
 
-        # Create a container for all the pages
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
-
-        # Configure the grid to expand
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
 
-        # Dictionary to hold the different frames
         self.frames = {}
 
         for F in (StartPage, PageOne, PageTwo):
@@ -117,12 +86,23 @@ class StartPage(tk.Frame):
         def login():
             username = input_text_username.get()
             password = input_text_password.get()
-            if (username == "rmch" and password == "RMCH") or (username == "ITadmin" and password == "rajIT"):
+            if (username == "a" and password == "a") or (username == "rmch" and password == "RMCH") or (username == "ITadmin" and password == "rajIT"):
                 controller.show_frame("PageOne")
             else:
                 label_error.config(text="Insert the Correct Constrain")
 
-        btn_login = tk.Button(self, text="Log In", width=8, command=login, font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
+        # image_path = "res/rajIT Solution Ltd EDITED.png"
+        # main_image = Image.open (image_path)
+        # resized_image = main_image.resize ((300, 75))
+        # self.image = ImageTk.PhotoImage (resized_image)
+
+        login_image_path = "res/btnLogin.png"
+        btn_image = Image.open(login_image_path)
+        resized_image_btn = btn_image.resize((150,42))
+        self.button_image = ImageTk.PhotoImage(resized_image_btn)
+
+        btn_login = tk.Button(self, image=self.button_image, command=login, borderwidth=0, bg='#222D20')
+        btn_login.image = btn_image  # Keep a reference to avoid garbage collection
         btn_login.pack(pady=10)
 
         label_error = tk.Label(self, text="", font=("Inter", 12), bg='#222D20', fg='white')
@@ -131,6 +111,32 @@ class StartPage(tk.Frame):
         # Temp button
         button2 = tk.Button(self, text="Go to Page Two", command=lambda: controller.show_frame("PageTwo"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
         button2.pack(pady=5)
+
+class PageOne(tk.Frame):
+    def __init__(self, parent, controller):
+        super().__init__(parent)
+        self.controller = controller
+        self.configure(bg='#222D20')
+
+        label = tk.Label(self, text="Page One", font=("Helvetica", 16), bg='#222D20', fg='white')
+        label.pack(side="top", fill="x", pady=10)
+
+        button = ttk.Button(self, text="Go to the Start Page",
+                            command=lambda: controller.show_frame("StartPage"))
+        button.pack(pady=5)
+
+class PageTwo(tk.Frame):
+    def __init__(self, parent, controller):
+        super().__init__(parent)
+        self.controller = controller
+        self.configure(bg='#A22F20')
+
+        label = tk.Label(self, text="Page Two", font=("Helvetica", 16))
+        label.pack()
+
+        button = ttk.Button(self, text="Go to the Start Page",
+                            command=lambda: controller.show_frame("StartPage"))
+        button.pack(pady=5)
 
 if __name__ == "__main__":
     app = MainApp()
