@@ -1,6 +1,10 @@
 import tkinter as tk
-from tkinter import ttk, CENTER, TOP, LEFT
+from tkinter import ttk, Canvas, TOP, LEFT, CENTER
 from PIL import Image, ImageTk
+import threading
+import serial
+import re
+import json
 
 class MainApp(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -27,6 +31,7 @@ class MainApp(tk.Tk):
     def show_frame(self, page_name):
         frame = self.frames[page_name]
         frame.tkraise()
+
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -92,14 +97,14 @@ class StartPage(tk.Frame):
                 label_error.config(text="Insert the Correct Constrain")
 
 
-        login_image_path = "res/btnLogin.png"
+        login_image_path = "res/figma-login-BTN.png"
         btn_image = Image.open(login_image_path)
         resized_image_btn = btn_image.resize((150,42))
         self.button_image = ImageTk.PhotoImage(resized_image_btn)
 
         btn_login = tk.Button(self, image=self.button_image, command=login, borderwidth=0, bg='#222D20', activebackground='#222D20')
         btn_login.image = btn_image  # Keep a reference to avoid garbage collection
-        btn_login.pack()
+        btn_login.pack(pady=10)
 
         label_error = tk.Label(self, text="", font=("Inter", 12), bg='#222D20', fg='white')
         label_error.pack(pady=10)
@@ -108,24 +113,64 @@ class StartPage(tk.Frame):
         button2 = tk.Button(self, text="Go to Page Two", command=lambda: controller.show_frame("PageTwo"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
         button2.pack(pady=5)
 
+
 class PageOne(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
         self.controller = controller
         self.configure(bg='#222D20')
 
-        label = tk.Label(self, text="Page One", font=("Helvetica", 16), bg='#222D20', fg='white')
+        label = tk.Label(self, text="", font=("Helvetica", 16), bg='#222D20', fg='white')
         label.pack(side="top", fill="x", pady=10)
 
-        button = ttk.Button(self, text="Go to the Start Page",
-                            command=lambda: controller.show_frame("StartPage"))
+        self.canvas = Canvas(self, bg='#FFFFFF', height=500, width=1400)
+        self.canvas.pack(pady=20)
+
+        button = ttk.Button(self, text="Go to the Start Page", command=lambda: controller.show_frame("StartPage"))
         button.pack(pady=5)
+
+        self.serial_port = 'COM13'
+        self.baud_rate = 9600
+
+        # Start serial monitoring in a separate thread
+        self.monitor_thread = threading.Thread(target=self.monitor_serial_port)
+        self.monitor_thread.daemon = True
+        self.monitor_thread.start()
+
+    def monitor_serial_port(self):
+        ser = serial.Serial(self.serial_port, self.baud_rate, timeout=1)
+        while True:
+            data = ser.read_until(b'\x04').decode('latin-1').strip()
+            if data:
+                parsed_data = self.parse_astm(data)
+                self.display_data(parsed_data)
+
+    def parse_astm(self, data):
+        sample_id_match = re.search(r'O\|\d+\|\d+\^([\w\d]+)\s*\^', data)
+        sample_id = sample_id_match.group(1) if sample_id_match else None
+
+        # datetime_match = re.search(r'\|\|(\d{8})(\d{6})\|', data)
+        # datetime_str = datetime_match.group(1) + datetime_match.group(2) if datetime_match else None
+
+        test_results = re.findall(r'R\|\d+\|\^\^\^(\d+)/\|([\d\.]+)\|([\w/]+)', data)
+        results = [{"test_no": res[0], "result_with_unit": f"{res[1]} {res[2]}"} for res in test_results]
+
+        # return {"sample_id": sample_id, "datetime": datetime_str, "results": results}
+        return {"sample_id": sample_id, "results": results}
+
+    def display_data(self, parsed_data):
+        self.canvas.delete("all")
+        y = 20
+        for result in parsed_data['results']:
+            self.canvas.create_text(10, y, anchor="nw", text=f"{result['test_no']}: {result['result_with_unit']}", fill="white")
+            y += 20
+
 
 class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
         self.controller = controller
-        self.configure(bg='#A22F20')
+        self.configure(bg='#222D20')
 
         label = tk.Label(self, text="Page Two", font=("Helvetica", 16))
         label.pack()
@@ -133,6 +178,7 @@ class PageTwo(tk.Frame):
         button = ttk.Button(self, text="Go to the Start Page",
                             command=lambda: controller.show_frame("StartPage"))
         button.pack(pady=5)
+
 
 if __name__ == "__main__":
     app = MainApp()
