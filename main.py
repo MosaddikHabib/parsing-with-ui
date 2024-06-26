@@ -1,10 +1,11 @@
 import tkinter as tk
-from tkinter import ttk, Canvas, TOP, LEFT, CENTER
+from tkinter import ttk, Canvas, TOP, LEFT, CENTER, font
 from PIL import Image, ImageTk
 import threading
 import serial
 import re
 import json
+
 
 class MainApp(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -172,8 +173,9 @@ class PageTwo(tk.Frame):
         self.controller = controller
         self.configure(bg='#222D20')
 
-        label = tk.Label(self, text="Page Two", font=("Helvetica", 16))
-        label.pack()
+        label_bold_font = font.Font (family="Inter", size=25, weight="bold")
+        label = tk.Label(self, text="Communication Parameter", font=label_bold_font, bg='#222D20', fg='#FFFFFF')
+        label.pack(pady=20)
 
         button = ttk.Button(self, text="Go to the Start Page",
                             command=lambda: controller.show_frame("StartPage"))
