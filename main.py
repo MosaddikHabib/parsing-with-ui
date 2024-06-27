@@ -248,6 +248,22 @@ class PageTwo (tk.Frame):
         parityBit_combobox.grid (row=3, column=1, padx=(5, 0), pady=5)
         parityBit_combobox.current (0)  # Set default selection to the first item
 
+        # create the combobox for stopBit selection--------------------------------
+        stopBit_image = 'res/stopBit.png'
+        img_open = Image.open (stopBit_image)
+        stopBit_resize_img = img_open.resize ((100, 30))
+        self.stopBitImg = ImageTk.PhotoImage (stopBit_resize_img)
+
+        image_label = tk.Label (frame, image=self.stopBitImg, bg="#222D20")
+        image_label.grid (row=4, column=0, padx=(0, 5), pady=5, sticky="ew")
+
+        # Create the combobox for parityBit selection
+        stopBit_options = ["1", "2"]
+        stopBit_combobox = ttk.Combobox (frame, values=stopBit_options, font=('Inter', 16), state="readonly",
+                                           width=34)
+        stopBit_combobox.grid (row=4, column=1, padx=(5, 0), pady=5)
+        stopBit_combobox.current (0)  # Set default selection to the first item
+
 
         # to go to the start page___________________________________________________
         button = ttk.Button (self, text="Go to the Start Page",
