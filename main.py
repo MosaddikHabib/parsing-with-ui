@@ -167,19 +167,39 @@ class PageOne(tk.Frame):
             y += 20
 
 
-class PageTwo(tk.Frame):
+class PageTwo (tk.Frame):
     def __init__(self, parent, controller):
-        super().__init__(parent)
+        super ().__init__ (parent)
         self.controller = controller
-        self.configure(bg='#222D20')
+        self.configure (bg='#222D20')
 
         label_bold_font = font.Font (family="Inter", size=25, weight="bold")
-        label = tk.Label(self, text="Communication Parameter", font=label_bold_font, bg='#222D20', fg='#FFFFFF')
-        label.pack(pady=20)
+        label = tk.Label (self, text="Communication Parameter", font=label_bold_font, bg='#222D20', fg='#FFFFFF')
+        label.pack (pady=20)
 
-        button = ttk.Button(self, text="Go to the Start Page",
-                            command=lambda: controller.show_frame("StartPage"))
-        button.pack(pady=5)
+        style = ttk.Style ()
+        style.configure ("Green.TFrame", background="#222D20")  # Change the background color to green
+
+        frame = ttk.Frame (self, width=300, height=100, padding="10", style="Green.TFrame")
+        frame.pack_propagate (False)  # Prevent the frame from resizing to fit its content
+        frame.pack (padx=10, pady=10)
+
+        com_port_button_image ="res/COM Port.png"
+        img_open = Image.open(com_port_button_image)
+        res_com_port_img = img_open.resize((100,30))
+        self.comImg = ImageTk.PhotoImage(res_com_port_img)
+
+        com_port_button = ttk.Button (frame, image=self.comImg, style="Custom.TButton")
+        com_port_button.grid (row=0, column=0, padx=(0, 5), pady=5, sticky="ew")
+
+        # Create the input field
+        com_port_input = ttk.Entry (frame, width=30)
+        com_port_input.grid (row=0, column=1, padx=(5, 0), pady=5)
+
+        # to go to the start page
+        button = ttk.Button (self, text="Go to the Start Page",
+                             command=lambda: controller.show_frame ("StartPage"))
+        button.pack (pady=5)
 
 
 if __name__ == "__main__":
