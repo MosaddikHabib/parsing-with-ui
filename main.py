@@ -178,23 +178,33 @@ class PageTwo (tk.Frame):
         label.pack (pady=20)
 
         style = ttk.Style ()
-        style.configure ("Green.TFrame", background="#222D20")  # Change the background color to green
+        style.configure ("Green.TFrame", background="#222D20")  # Change the background color to match the frame
 
         frame = ttk.Frame (self, width=300, height=100, padding="10", style="Green.TFrame")
         frame.pack_propagate (False)  # Prevent the frame from resizing to fit its content
         frame.pack (padx=10, pady=10)
 
-        com_port_button_image ="res/COM Port.png"
-        img_open = Image.open(com_port_button_image)
-        res_com_port_img = img_open.resize((100,30))
-        self.comImg = ImageTk.PhotoImage(res_com_port_img)
+        # COM - Port - Selection Sector----------------------------------------
+        com_port_button_image = "res/COM Port.png"
+        img_open = Image.open (com_port_button_image)
+        res_com_port_img = img_open.resize ((100, 30))
+        self.comImg = ImageTk.PhotoImage (res_com_port_img)
 
-        com_port_button = ttk.Button (frame, image=self.comImg, style="Custom.TButton")
-        com_port_button.grid (row=0, column=0, padx=(0, 5), pady=5, sticky="ew")
+        image_label = tk.Label (frame, image=self.comImg, bg="#222D20")
+        image_label.grid (row=0, column=0, padx=(0, 5), pady=5, sticky="ew")
 
         # Create the input field
-        com_port_input = ttk.Entry (frame, width=30)
+        com_port_input = ttk.Entry (frame, width=35, font=('Inter', 16))
         com_port_input.grid (row=0, column=1, padx=(5, 0), pady=5)
+
+        # Baud-Rate Selection sector----------------------------------------------
+        baud_rate_button_image = "res/Baud Rate.png"
+        img_open = Image.open (baud_rate_button_image)
+        res_baud_rate_img = img_open.resize ((100, 30))
+        self.baudRateImg = ImageTk.PhotoImage (res_baud_rate_img)
+
+        image_label = tk.Label (frame, image=self.baudRateImg, bg="#222D20")
+        image_label.grid (row=1, column=0, padx=(0, 5), pady=5, sticky="ew")
 
         # to go to the start page
         button = ttk.Button (self, text="Go to the Start Page",
