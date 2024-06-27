@@ -213,6 +213,9 @@ class PageTwo (tk.Frame):
         baud_rate_combobox.grid (row=1, column=1, padx=(5, 0), pady=5)
         baud_rate_combobox.current (0)  # Set default selection to the first item
 
+        # Increase the font size of the dropdown list
+        self.option_add ('*TCombobox*Listbox.font', ('Inter', 16))
+
         # create the combobox for dataBits selection--------------------------------
         dataBits_button_image = 'res/dataBits.png'
         img_open = Image.open (dataBits_button_image)
@@ -230,7 +233,7 @@ class PageTwo (tk.Frame):
         dataBit_combobox.current (0)  # Set default selection to the first item
 
         # create the combobox for parityBit selection--------------------------------
-        parityBit_image = 'res/dataBits.png'
+        parityBit_image = 'res/ParityBits.png'
         img_open = Image.open (parityBit_image)
         parityBit_resize_img = img_open.resize ((100, 30))
         self.parityBitImg = ImageTk.PhotoImage (parityBit_resize_img)
@@ -242,8 +245,9 @@ class PageTwo (tk.Frame):
         parityBit_options = ["EVEN", "ODD", "NONE"]
         parityBit_combobox = ttk.Combobox (frame, values=parityBit_options, font=('Inter', 16), state="readonly",
                                          width=34)
-        parityBit_combobox.grid (row=2, column=1, padx=(5, 0), pady=5)
+        parityBit_combobox.grid (row=3, column=1, padx=(5, 0), pady=5)
         parityBit_combobox.current (0)  # Set default selection to the first item
+
 
         # to go to the start page___________________________________________________
         button = ttk.Button (self, text="Go to the Start Page",
