@@ -197,7 +197,8 @@ class PageTwo (tk.Frame):
         com_port_input = ttk.Entry (frame, width=35, font=('Inter', 16))
         com_port_input.grid (row=0, column=1, padx=(5, 0), pady=5)
 
-        # Baud-Rate Selection sector----------------------------------------------
+
+        # Baudrate selection-----------------------------------------------
         baud_rate_button_image = "res/Baud Rate.png"
         img_open = Image.open (baud_rate_button_image)
         res_baud_rate_img = img_open.resize ((100, 30))
@@ -206,7 +207,45 @@ class PageTwo (tk.Frame):
         image_label = tk.Label (frame, image=self.baudRateImg, bg="#222D20")
         image_label.grid (row=1, column=0, padx=(0, 5), pady=5, sticky="ew")
 
-        # to go to the start page
+        # Create the combobox for baud rate selection
+        baud_rate_options = ["9600", "19200", "38400", "57600"]
+        baud_rate_combobox = ttk.Combobox (frame, values=baud_rate_options, font=('Inter', 16), state="readonly",width=34)
+        baud_rate_combobox.grid (row=1, column=1, padx=(5, 0), pady=5)
+        baud_rate_combobox.current (0)  # Set default selection to the first item
+
+        # create the combobox for dataBits selection--------------------------------
+        dataBits_button_image = 'res/dataBits.png'
+        img_open = Image.open (dataBits_button_image)
+        dataBits_resize_img = img_open.resize ((100, 30))
+        self.dataBitsImg = ImageTk.PhotoImage (dataBits_resize_img)
+
+        image_label = tk.Label (frame, image=self.dataBitsImg, bg="#222D20")
+        image_label.grid (row=2, column=0, padx=(0, 5), pady=5, sticky="ew")
+
+        # Create the combobox for dataBit selection
+        dataBit_options = ["8", "7"]
+        dataBit_combobox = ttk.Combobox (frame, values=dataBit_options, font=('Inter', 16), state="readonly",
+                                           width=34)
+        dataBit_combobox.grid (row=2, column=1, padx=(5, 0), pady=5)
+        dataBit_combobox.current (0)  # Set default selection to the first item
+
+        # create the combobox for parityBit selection--------------------------------
+        parityBit_image = 'res/dataBits.png'
+        img_open = Image.open (parityBit_image)
+        parityBit_resize_img = img_open.resize ((100, 30))
+        self.parityBitImg = ImageTk.PhotoImage (parityBit_resize_img)
+
+        image_label = tk.Label (frame, image=self.parityBitImg, bg="#222D20")
+        image_label.grid (row=3, column=0, padx=(0, 5), pady=5, sticky="ew")
+
+        # Create the combobox for parityBit selection
+        parityBit_options = ["EVEN", "ODD", "NONE"]
+        parityBit_combobox = ttk.Combobox (frame, values=parityBit_options, font=('Inter', 16), state="readonly",
+                                         width=34)
+        parityBit_combobox.grid (row=2, column=1, padx=(5, 0), pady=5)
+        parityBit_combobox.current (0)  # Set default selection to the first item
+
+        # to go to the start page___________________________________________________
         button = ttk.Button (self, text="Go to the Start Page",
                              command=lambda: controller.show_frame ("StartPage"))
         button.pack (pady=5)
