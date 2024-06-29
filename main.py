@@ -335,13 +335,18 @@ class PageTwo(tk.Frame):
         self.stopBit_combobox.grid(row=4, column=1, padx=(5, 0), pady=5)
         self.stopBit_combobox.set(controller.serial_params["stop_bits"])
 
-        # Save button
-        save_button = ttk.Button(self, text="Save", command=self.save_params, style="Green.TButton")
-        save_button.pack(side=tk.LEFT, padx=5, pady=5)
+        # btn_style = ttk.Style()
+        # btn_style.configure("greenBTN.Tbutton_frame", background = "green")
 
-        # Back button
-        back_button = ttk.Button(self, text="Back", command=lambda: controller.show_frame("PageOne"), style="Red.TButton")
-        back_button.pack(side=tk.LEFT, padx=5, pady=5)
+        # Save and Back buttons
+        button_frame = ttk.Frame(self, style="Green.TFrame")
+        button_frame.pack(pady=10)
+
+        save_button = ttk.Button(button_frame, text="Save", command=self.save_params)
+        save_button.pack(side=tk.LEFT, padx=5, pady=10)
+
+        back_button = ttk.Button(button_frame, text="Back", command=lambda: controller.show_frame("PageOne"))
+        back_button.pack(side=tk.LEFT, padx=5, pady=10)
 
         # Button to go to the start page
         button = ttk.Button(self, text="Go to the Start Page", command=lambda: controller.show_frame("StartPage"))
