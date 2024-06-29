@@ -257,8 +257,17 @@ class PageTwo(tk.Frame):
         label = tk.Label(self, text="Communication Parameter", font=label_bold_font, bg='#222D20', fg='#FFFFFF')
         label.pack(pady=20)
 
-        style = ttk.Style()
-        style.configure("Green.TFrame", background="#222D20")
+        style = ttk.Style ()
+        style.configure ("Green.TFrame", background="#222D20")
+        style.configure ("StartPage.TButton", background='#AD9309', foreground='white', font=("Inter", 12, "bold"))
+        style.configure ("PageTwoBack.TButton", font=("Inter", 12, "bold"), background='#0A717E', foreground='white',
+                         highlightthickness=0)  # Set highlightthickness to 0 to remove the gray/white border
+        style.map ("PageTwoBack.TButton",
+                   background=[('active', '#0A717E')])  # Adjust background color on active state if needed
+        style.configure ("PageTwoSave.TButton", background='#FF5733', foreground='white', font=("Inter", 12, "bold"),
+                         highlightthickness=0)  # Set highlightthickness to 0 to remove the gray/white border
+        style.map ("PageTwoSave.TButton",
+                   background=[('active', '#FF5733')])  # Adjust background color on active state if needed
 
         frame = ttk.Frame(self, width=300, height=100, padding="10", style="Green.TFrame")
         frame.pack_propagate(False)
@@ -286,7 +295,7 @@ class PageTwo(tk.Frame):
         image_label = tk.Label(frame, image=self.baudRateImg, bg="#222D20")
         image_label.grid(row=1, column=0, padx=(0, 5), pady=5, sticky="ew")
 
-        baud_rate_options = ["9600", "19200", "38400", "57600"]
+        baud_rate_options = ["1200","2400","4800","9600", "19200", "38400", "57600"]
         self.baud_rate_combobox = ttk.Combobox(frame, values=baud_rate_options, font=('Inter', 16), state="readonly", width=34)
         self.baud_rate_combobox.grid(row=1, column=1, padx=(5, 0), pady=5)
         self.baud_rate_combobox.set(controller.serial_params["baud_rate"])
@@ -335,18 +344,17 @@ class PageTwo(tk.Frame):
         self.stopBit_combobox.grid(row=4, column=1, padx=(5, 0), pady=5)
         self.stopBit_combobox.set(controller.serial_params["stop_bits"])
 
-        # btn_style = ttk.Style()
-        # btn_style.configure("greenBTN.Tbutton_frame", background = "green")
 
-        # Save and Back buttons
+        # Save and Back buttons----------------------------------------
         button_frame = ttk.Frame(self, style="Green.TFrame")
         button_frame.pack(pady=10)
 
-        save_button = ttk.Button(button_frame, text="Save", command=self.save_params)
-        save_button.pack(side=tk.LEFT, padx=5, pady=10)
+        save_button = ttk.Button (button_frame, text="Save", command=self.save_params, style="PageTwoSave.TButton")
+        save_button.pack (side=tk.LEFT, padx=5, pady=10)
 
-        back_button = ttk.Button(button_frame, text="Back", command=lambda: controller.show_frame("PageOne"))
-        back_button.pack(side=tk.LEFT, padx=5, pady=10)
+        back_button = ttk.Button (button_frame, text="Back", command=lambda: controller.show_frame ("PageOne"),
+                                  style="PageTwoBack.TButton")
+        back_button.pack (side=tk.LEFT, padx=5, pady=10)
 
         # Button to go to the start page
         button = ttk.Button(self, text="Go to the Start Page", command=lambda: controller.show_frame("StartPage"))
