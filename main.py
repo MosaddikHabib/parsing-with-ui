@@ -260,14 +260,8 @@ class PageTwo(tk.Frame):
         style = ttk.Style ()
         style.configure ("Green.TFrame", background="#222D20")
         style.configure ("StartPage.TButton", background='#AD9309', foreground='white', font=("Inter", 12, "bold"))
-        style.configure ("PageTwoBack.TButton", font=("Inter", 12, "bold"), background='#0A717E', foreground='white',
-                         highlightthickness=0)  # Set highlightthickness to 0 to remove the gray/white border
-        style.map ("PageTwoBack.TButton",
-                   background=[('active', '#0A717E')])  # Adjust background color on active state if needed
-        style.configure ("PageTwoSave.TButton", background='#FF5733', foreground='white', font=("Inter", 12, "bold"),
-                         highlightthickness=0)  # Set highlightthickness to 0 to remove the gray/white border
-        style.map ("PageTwoSave.TButton",
-                   background=[('active', '#FF5733')])  # Adjust background color on active state if needed
+        style.configure ("PageTwoBack.TButton", font=("Inter", 12, "bold"), background='#0A717E', foreground='black')
+        style.configure ("PageTwoSave.TButton", background='#FF5733', foreground='black', font=("Inter", 12, "bold"))
 
         frame = ttk.Frame(self, width=300, height=100, padding="10", style="Green.TFrame")
         frame.pack_propagate(False)
