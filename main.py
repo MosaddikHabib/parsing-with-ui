@@ -7,8 +7,6 @@ import serial
 import re
 import json
 
-from tkvideo import tkvideo
-
 
 class MainApp(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -208,9 +206,11 @@ def load_serial_params():
             "stop_bits": "1"
         }
 
+
 def save_serial_params(params):
     with open("serial_params.json", "w") as f:
         json.dump(params, f)
+
 
 # active start Page --------
 class Controller(tk.Tk):
@@ -245,6 +245,7 @@ class Controller(tk.Tk):
         self.serial_params.update(params)
         save_serial_params(self.serial_params)
 # ==============================
+
 
 class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
@@ -335,8 +336,12 @@ class PageTwo(tk.Frame):
         self.stopBit_combobox.set(controller.serial_params["stop_bits"])
 
         # Save button
-        save_button = ttk.Button(self, text="Save", command=self.save_params)
-        save_button.pack(pady=5)
+        save_button = ttk.Button(self, text="Save", command=self.save_params, style="Green.TButton")
+        save_button.pack(side=tk.LEFT, padx=5, pady=5)
+
+        # Back button
+        back_button = ttk.Button(self, text="Back", command=lambda: controller.show_frame("PageOne"), style="Red.TButton")
+        back_button.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Button to go to the start page
         button = ttk.Button(self, text="Go to the Start Page", command=lambda: controller.show_frame("StartPage"))
@@ -354,9 +359,6 @@ class PageTwo(tk.Frame):
         messagebox.showinfo("Info", "Communication parameters saved successfully.")
 
 
-# if __name__ == "__main__":
-#     app = MainApp()
-#     app.mainloop()
 if __name__ == "__main__":
     app = Controller()
     app.mainloop()
