@@ -7,6 +7,8 @@ import serial
 import re
 import json
 
+from tkvideo import tkvideo
+
 
 class MainApp(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -40,6 +42,7 @@ class StartPage(tk.Frame):
         super().__init__(parent)
         self.controller = controller
         self.configure(bg='#222D20')
+
 
         label = tk.Label(self, text="", font=("Helvetica", 16), bg='#222D20', fg='white')
         label.pack(side="top", fill="x", pady=65)
@@ -95,7 +98,7 @@ class StartPage(tk.Frame):
         def login():
             username = input_text_username.get()
             password = input_text_password.get()
-            if (username == "a" and password == "a") or (username == "rmch" and password == "RMCH") or (username == "ITadmin" and password == "rajIT"):
+            if (username == "a" and password == "a") or (username == "rmch" and password == "RMCH"):
                 controller.show_frame("PageOne")
             else:
                 label_error.config(text="Insert the Correct Constrain")
@@ -209,6 +212,7 @@ def save_serial_params(params):
     with open("serial_params.json", "w") as f:
         json.dump(params, f)
 
+# active start Page --------
 class Controller(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -216,8 +220,8 @@ class Controller(tk.Tk):
         self.serial_params = load_serial_params()
 
         self.title("Serial Communication Monitor")
-        self.geometry("1600x900")
-        self.resizable(False, False)
+        self.geometry("1000x500")
+        self.resizable(True, True)
 
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
@@ -240,8 +244,8 @@ class Controller(tk.Tk):
     def update_serial_params(self, params):
         self.serial_params.update(params)
         save_serial_params(self.serial_params)
+# ==============================
 
-# ====================================================================
 class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
