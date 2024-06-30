@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from tkinter import colorchooser
+import pyperclip  # To copy text to clipboard
 
 def pick_color():
     color_code = colorchooser.askcolor(title="Choose color")
@@ -32,6 +33,17 @@ def show_color():
         hex_label.configure(text="Invalid Hex")
         rgb_label.configure(text="Invalid RGB")
 
+def copy_to_clipboard(event):
+    # Get the text of the label that triggered the event
+    text_to_copy = event.widget.cget("text")
+    if text_to_copy.startswith("Hex: "):
+        text_to_copy = text_to_copy[5:]
+    elif text_to_copy.startswith("RGB: "):
+        text_to_copy = text_to_copy[5:]
+
+    # Copy text to clipboard
+    pyperclip.copy(text_to_copy)
+
 # Create the main window
 root = ctk.CTk()
 root.title("Color Picker")
@@ -58,8 +70,14 @@ show_button.pack(pady=10)
 hex_label = ctk.CTkLabel(root, text="Hex: ")
 hex_label.pack(pady=10)
 
+# Bind click event to copy hex color
+hex_label.bind("<Button-1>", copy_to_clipboard)
+
 rgb_label = ctk.CTkLabel(root, text="RGB: ")
 rgb_label.pack(pady=10)
+
+# Bind click event to copy RGB color
+rgb_label.bind("<Button-1>", copy_to_clipboard)
 
 # Run the main loop
 root.mainloop()
