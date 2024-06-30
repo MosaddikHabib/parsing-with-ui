@@ -140,24 +140,27 @@ class PageOne(tk.Frame):
         self.api_url_entry.grid(row=0, column=1, padx=5)
 
         self.api_button = ttk.Button(input_frame, text="Insert", command=self.save_api_url)
-        self.api_button.grid(row=0, column=2, padx=5)
+        self.api_button.grid(row=0, column=2, padx=0)
 
         # Frame for canvases
-        canvas_frame = tk.Frame (self, bg='#222D20')
-        canvas_frame.grid (row=1, column=0, pady=10, sticky="nsew", padx=(80,0))
+        canvas_frame = tk.Frame(self, bg='#222D20')
+        canvas_frame.grid(row=1, column=0, pady=10, sticky="nsew", padx=(80,0))
 
-        self.canvas = tk.Canvas (canvas_frame, bg='#FFFFFF', height=500, width=680)
-        self.canvas.pack (side="left", padx=5, pady=5, fill="both", expand=True)
+        self.canvas = tk.Canvas(canvas_frame, bg='#FFFFFF', height=500, width=680)
+        self.canvas.pack(side="left", padx=5, pady=5, fill="both", expand=True)
 
-        self.sent_canvas = tk.Canvas (canvas_frame, bg='#F0F0F0', height=500, width=680)
-        self.sent_canvas.pack (side="left", padx=5, pady=5, fill="both", expand=True)
+        self.sent_canvas = tk.Canvas(canvas_frame, bg='#F0F0F0', height=500, width=680)
+        self.sent_canvas.pack(side="left", padx=5, pady=5, fill="both", expand=True)
 
-        # Frame for exit button
+        # Frame for exit and settings buttons
         button_frame = tk.Frame(self, bg='#222D20')
-        button_frame.grid(row=2, column=0, pady=10)
+        button_frame.grid(row=2, column=0, pady=10, sticky="se")
 
         exit_button = ttk.Button(button_frame, text="Exit", command=self.exit_application)
-        exit_button.pack()
+        exit_button.pack(side="left", padx=5)
+
+        settings_button = ttk.Button(button_frame, text="Settings", command=self.open_settings)
+        settings_button.pack(side="right", padx=5)
 
         self.serial_port = None
         self.baud_rate = None
@@ -264,6 +267,9 @@ class PageOne(tk.Frame):
     def exit_application(self):
         self.controller.quit()
 
+    def open_settings(self):
+        self.controller.show_frame("PageTwo")
+
 
 # additional classes to save parameters====================================================================
 def load_serial_params():
@@ -293,7 +299,7 @@ class Controller(tk.Tk):
 
         self.serial_params = load_serial_params()
 
-        self.title("Serial Communication Monitor")
+        self.title("hostMate | RajIT | made for RMCH")
         self.geometry("1000x500")
         self.resizable(True, True)
 
@@ -329,7 +335,7 @@ class PageTwo(tk.Frame):
 
         label_bold_font = font.Font(family="Inter", size=25, weight="bold")
         label = tk.Label(self, text="Communication Parameter", font=label_bold_font, bg='#222D20', fg='#FFFFFF')
-        label.pack(pady=20)
+        label.pack(pady=(175,20))
 
         style = ttk.Style ()
         style.configure ("Green.TFrame", background="#222D20")
