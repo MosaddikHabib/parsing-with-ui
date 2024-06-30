@@ -128,25 +128,34 @@ class PageOne(tk.Frame):
         self.configure(bg='#222D20')
 
         label = tk.Label(self, text="", font=("Helvetica", 16), bg='#222D20', fg='white')
-        label.pack(side="top", fill="x", pady=10)
+        label.grid(row=0, column=0, columnspan=2, sticky="ew", pady=10)
 
-        self.canvas = tk.Canvas(self, bg='#FFFFFF', height=500, width=700)
-        self.canvas.pack(side="left", pady=20, padx=10)
+        # Frame to hold the input field and button
+        input_frame = tk.Frame(self, bg='#222D20')
+        input_frame.grid(row=0, column=1, sticky="ne", padx=10, pady=10)
 
-        self.sent_canvas = tk.Canvas(self, bg='#F0F0F0', height=500, width=700)
-        self.sent_canvas.pack(side="right", pady=20, padx=10)
+        self.api_url_entry = tk.Entry(input_frame, width=40)
+        self.api_url_entry.pack(side="right", padx=5)
 
-        self.api_url_entry = tk.Entry(self, width=50)
-        self.api_url_entry.pack(pady=5)
+        self.api_button = ttk.Button(input_frame, text="DB Insert", command=self.save_api_url)
+        self.api_button.pack(side="right")
 
-        self.api_button = ttk.Button(self, text="DB Insert", command=self.save_api_url)
-        self.api_button.pack(pady=5)
+        # Frame to hold the canvases
+        canvas_frame = tk.Frame(self, bg='#222D20')
+        canvas_frame.grid(row=1, column=0, columnspan=2, pady=10)
 
-        button = ttk.Button(self, text="Go to the Start Page", command=lambda: controller.show_frame("StartPage"))
-        button.pack(pady=5)
+        self.canvas = tk.Canvas(canvas_frame, bg='#FFFFFF', height=500, width=680)
+        self.canvas.pack(side="left", padx=5)
 
-        exit_button = ttk.Button(self, text="Exit", command=self.exit_application)
-        exit_button.pack(pady=5)
+        self.sent_canvas = tk.Canvas(canvas_frame, bg='#F0F0F0', height=500, width=680)
+        self.sent_canvas.pack(side="left", padx=5)
+
+        # Frame to hold the exit button
+        button_frame = tk.Frame(self, bg='#222D20')
+        button_frame.grid(row=2, column=0, columnspan=2, pady=10)
+
+        exit_button = ttk.Button(button_frame, text="Exit", command=self.exit_application)
+        exit_button.pack()
 
         self.serial_port = None
         self.baud_rate = None
@@ -252,6 +261,7 @@ class PageOne(tk.Frame):
 
     def exit_application(self):
         self.controller.quit()
+
 
 # additional classes to save parameters====================================================================
 def load_serial_params():
