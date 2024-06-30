@@ -145,6 +145,9 @@ class PageOne(tk.Frame):
         button = ttk.Button(self, text="Go to the Start Page", command=lambda: controller.show_frame("StartPage"))
         button.pack(pady=5)
 
+        exit_button = ttk.Button(self, text="Exit", command=self.exit_application)
+        exit_button.pack(pady=5)
+
         self.serial_port = None
         self.baud_rate = None
         self.data_bits = None
@@ -246,6 +249,9 @@ class PageOne(tk.Frame):
         # Start the serial monitoring process if not already started
         if not hasattr(self, 'monitor_thread') or not self.monitor_thread.is_alive():
             self.start_serial_monitoring()
+
+    def exit_application(self):
+        self.controller.quit()
 
 # additional classes to save parameters====================================================================
 def load_serial_params():
