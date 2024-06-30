@@ -36,6 +36,7 @@ def show_color():
 root = ctk.CTk()
 root.title("Color Picker")
 root.geometry("600x400")  # Set window size to 600x400
+root.resizable(False, False)
 ctk.set_appearance_mode("dark")  # Set dark mode
 ctk.set_default_color_theme("dark-blue")  # Set color theme
 
@@ -43,7 +44,7 @@ ctk.set_default_color_theme("dark-blue")  # Set color theme
 pick_button = ctk.CTkButton(root, text="Pick a Color", command=pick_color)
 pick_button.pack(pady=20)
 
-color_label = ctk.CTkLabel(root, text="", width=400, height=200, fg_color="white", corner_radius=10)
+color_label = ctk.CTkLabel(root, text="", width=200, height=75, fg_color="white", corner_radius=10)
 color_label.pack(pady=20)
 
 # Input field for hex or RGB code
