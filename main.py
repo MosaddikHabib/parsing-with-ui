@@ -14,7 +14,7 @@ class MainApp(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.geometry("1920x1080")
+        # self.geometry("1920x1080")
         self.title("hostMate | RajIT | made for RMCH")
 
         container = tk.Frame(self)
@@ -119,42 +119,42 @@ class StartPage(tk.Frame):
         button2 = tk.Button(self, text="Go to Page Two", command=lambda: controller.show_frame("PageTwo"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
         button2.pack(pady=5)
 
-# to remember the API address + instert it autometically until replaced by new one.
+
+# to remember the API address + insert it automatically until replaced by new one.
 CONFIG_FILE = "config.json"
+
 class PageOne(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
         self.controller = controller
         self.configure(bg='#222D20')
 
-        label = tk.Label(self, text="", font=("Helvetica", 16), bg='#222D20', fg='white')
-        label.grid(row=0, column=0, columnspan=2, sticky="ew", pady=10)
-
-        # Frame to hold the input field and button
+        # Frame for input field and button
         input_frame = tk.Frame(self, bg='#222D20')
-        input_frame.grid(row=0, column=1, sticky="ne", padx=10, pady=50)
+        input_frame.grid(row=0, column=0, pady=(75,0), padx=10, sticky="e")
+
+        label = tk.Label(input_frame, text="API URL:", font=("Helvetica", 16), bg='#222D20', fg='white')
+        label.grid(row=0, column=0, padx=5, sticky="w")
 
         self.api_url_entry = tk.Entry(input_frame, width=40)
-        self.api_url_entry.pack(side="right", padx=5)
+        self.api_url_entry.grid(row=0, column=1, padx=5)
 
-        self.api_button = ttk.Button(input_frame, text="DB Insert", command=self.save_api_url)
-        self.api_button.pack(side="right")
+        self.api_button = ttk.Button(input_frame, text="Insert", command=self.save_api_url)
+        self.api_button.grid(row=0, column=2, padx=5)
 
-        # Frame to hold the canvases
-        canvas_frame = tk.Frame(self, bg='#222D20')
-        canvas_frame.grid(row=1, column=0, columnspan=2, pady=10)
-        canvas_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
-        # frame.place (relx=0.5, rely=0.5, anchor=tk.CENTER)
+        # Frame for canvases
+        canvas_frame = tk.Frame (self, bg='#222D20')
+        canvas_frame.grid (row=1, column=0, pady=10, sticky="nsew", padx=(80,0))
 
-        self.canvas = tk.Canvas(canvas_frame, bg='#FFFFFF', height=500, width=680)
-        self.canvas.pack(side="left", padx=5)
+        self.canvas = tk.Canvas (canvas_frame, bg='#FFFFFF', height=500, width=680)
+        self.canvas.pack (side="left", padx=5, pady=5, fill="both", expand=True)
 
-        self.sent_canvas = tk.Canvas(canvas_frame, bg='#F0F0F0', height=500, width=680)
-        self.sent_canvas.pack(side="left", padx=5)
+        self.sent_canvas = tk.Canvas (canvas_frame, bg='#F0F0F0', height=500, width=680)
+        self.sent_canvas.pack (side="left", padx=5, pady=5, fill="both", expand=True)
 
-        # Frame to hold the exit button
+        # Frame for exit button
         button_frame = tk.Frame(self, bg='#222D20')
-        button_frame.grid(row=2, column=0, columnspan=2, pady=10)
+        button_frame.grid(row=2, column=0, pady=10)
 
         exit_button = ttk.Button(button_frame, text="Exit", command=self.exit_application)
         exit_button.pack()
