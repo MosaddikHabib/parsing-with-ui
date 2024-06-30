@@ -132,7 +132,7 @@ class PageOne(tk.Frame):
 
         # Frame to hold the input field and button
         input_frame = tk.Frame(self, bg='#222D20')
-        input_frame.grid(row=0, column=1, sticky="ne", padx=10, pady=10)
+        input_frame.grid(row=0, column=1, sticky="ne", padx=10, pady=50)
 
         self.api_url_entry = tk.Entry(input_frame, width=40)
         self.api_url_entry.pack(side="right", padx=5)
@@ -143,6 +143,8 @@ class PageOne(tk.Frame):
         # Frame to hold the canvases
         canvas_frame = tk.Frame(self, bg='#222D20')
         canvas_frame.grid(row=1, column=0, columnspan=2, pady=10)
+        canvas_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+        # frame.place (relx=0.5, rely=0.5, anchor=tk.CENTER)
 
         self.canvas = tk.Canvas(canvas_frame, bg='#FFFFFF', height=500, width=680)
         self.canvas.pack(side="left", padx=5)
