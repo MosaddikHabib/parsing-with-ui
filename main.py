@@ -116,8 +116,8 @@ class StartPage(tk.Frame):
         label_error.pack(pady=10)
 
         # Temp button
-        button2 = tk.Button(self, text="Go to Page Two", command=lambda: controller.show_frame("PageTwo"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
-        button2.pack(pady=5)
+        # button2 = tk.Button(self, text="Go to Page Two", command=lambda: controller.show_frame("PageTwo"), font=("Inter", 12, "bold"), bg='#AD9309', fg='white')
+        # button2.pack(pady=5)
 
 
 # to remember the API address + insert it automatically until replaced by new one.
@@ -271,6 +271,7 @@ class PageOne(tk.Frame):
         self.controller.show_frame("PageTwo")
 
 
+
 # additional classes to save parameters====================================================================
 def load_serial_params():
     try:
@@ -347,7 +348,7 @@ class PageTwo(tk.Frame):
         frame.pack_propagate(False)
         frame.pack(padx=10, pady=10)
 
-        # COM - Port - Selection Sector
+        # COM - Port - Selection Sector_____________________________________________________
         com_port_button_image = "res/COM Port.png"
         img_open = Image.open(com_port_button_image)
         res_com_port_img = img_open.resize((100, 30))
@@ -360,7 +361,7 @@ class PageTwo(tk.Frame):
         self.com_port_input.grid(row=0, column=1, padx=(5, 0), pady=5)
         self.com_port_input.insert(0, controller.serial_params["com_port"])
 
-        # Baudrate selection
+        # Baudrate selection____________________________________________________________
         baud_rate_button_image = "res/Baud Rate.png"
         img_open = Image.open(baud_rate_button_image)
         res_baud_rate_img = img_open.resize((100, 30))
@@ -376,7 +377,7 @@ class PageTwo(tk.Frame):
 
         self.option_add('*TCombobox*Listbox.font', ('Inter', 16))
 
-        # Data Bits selection
+        # Data Bits selection_________________________________________________________________
         dataBits_button_image = 'res/dataBits.png'
         img_open = Image.open(dataBits_button_image)
         dataBits_resize_img = img_open.resize((100, 30))
@@ -399,6 +400,7 @@ class PageTwo(tk.Frame):
         image_label = tk.Label(frame, image=self.parityBitImg, bg="#222D20")
         image_label.grid(row=3, column=0, padx=(0, 5), pady=5, sticky="ew")
 
+
         parityBit_options = ["EVEN", "ODD", "NONE"]
         self.parityBit_combobox = ttk.Combobox(frame, values=parityBit_options, font=('Inter', 16), state="readonly", width=34)
         self.parityBit_combobox.grid(row=3, column=1, padx=(5, 0), pady=5)
@@ -414,7 +416,7 @@ class PageTwo(tk.Frame):
         image_label.grid(row=4, column=0, padx=(0, 5), pady=5, sticky="ew")
 
         stopBit_options = ["1", "2"]
-        self.stopBit_combobox = ttk.Combobox(frame, values=stopBit_options, font=('Inter', 16), state="readonly", width=34)
+        self.stopBit_combobox = ttk.Combobox(frame, values=stopBit_options, font=('Inter', 16), state="readonly", width=34, background="lightblue", foreground="black")
         self.stopBit_combobox.grid(row=4, column=1, padx=(5, 0), pady=5)
         self.stopBit_combobox.set(controller.serial_params["stop_bits"])
 
@@ -430,8 +432,8 @@ class PageTwo(tk.Frame):
         back_button.pack (side=tk.LEFT, padx=5, pady=10)
 
         # Button to go to the start page
-        button = ttk.Button(self, text="Go to the Start Page", command=lambda: controller.show_frame("StartPage"))
-        button.pack(pady=5)
+        # button = ttk.Button(self, text="Go to the Start Page", command=lambda: controller.show_frame("StartPage"))
+        # button.pack(pady=5)
 
     def save_params(self):
         params = {

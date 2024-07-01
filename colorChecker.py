@@ -47,7 +47,7 @@ def copy_to_clipboard(event):
 # Create the main window
 root = ctk.CTk()
 root.title("Color Picker")
-root.geometry("600x400")  # Set window size to 600x400
+root.geometry("250x400")  # Set window size to 600x400
 root.resizable(False, False)
 ctk.set_appearance_mode("dark")  # Set dark mode
 ctk.set_default_color_theme("dark-blue")  # Set color theme
