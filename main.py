@@ -450,4 +450,3 @@ class PageTwo(tk.Frame):
 if __name__ == "__main__":
     app = Controller()
     app.mainloop()
-
