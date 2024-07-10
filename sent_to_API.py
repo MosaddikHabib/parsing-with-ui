@@ -6,8 +6,8 @@ def get_unsent_data_from_database(db_path):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     # Retrieve rows where sent_to_api is 0
-    # query = 'SELECT id, sample_id, json_data FROM astm_data WHERE sent_to_api = 0'
-    query = 'json_data FROM astm_data WHERE sent_to_api = 0'
+    query = 'SELECT id, sample_id, json_data FROM astm_data WHERE sent_to_api = 0'
+    # query = 'SELECT json_data FROM astm_data WHERE sent_to_api = 0'
     cursor.execute(query)
     data = cursor.fetchall()
     conn.close()
