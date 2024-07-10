@@ -200,6 +200,7 @@ class PageOne(tk.Frame):
                 if 'L|' in received_data:
                     if current_data:
                         self.store_data(cursor, current_data)
+                        # I have to sent data to an API
                         current_data = None  # Reset current_data after storing
 
                 self.send_ack()
@@ -306,7 +307,6 @@ class PageOne(tk.Frame):
     def __del__(self):
         if self.ser:
             self.ser.close()
-
 
 
 # additional classes to save parameters====================================================================

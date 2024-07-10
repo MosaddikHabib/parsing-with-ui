@@ -302,7 +302,7 @@ class PageOne(tk.Frame):
 
     def connect_to_database(self):
         try:
-            connection = sqlite3.connect('habib05.db')
+            connection = sqlite3.connect('habib07.db')
             cursor = connection.cursor()
             # Create the table if it doesn't exist
             cursor.execute ('''
